@@ -1,38 +1,25 @@
-import Link from "next/link"
+import TodoForm from "@/components/TodoForm"
+import TodoItem from "@/components/TodoItem"
 
-import { siteConfig } from "@/config/site"
-import { buttonVariants } from "@/components/ui/button"
+export default async function IndexPage() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/todo/list`, {
+    cache: "no-store",
+  })
+  const data = await res.json()
+  const todos = data?.data || []
 
-export default function IndexPage() {
   return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="flex max-w-[980px] flex-col items-start gap-2">
-        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Beautifully designed components <br className="hidden sm:inline" />
-          built with ShadcnUI and Tailwind CSS.
-        </h1>
-        <p className="max-w-[700px] text-lg text-muted-foreground">
-          Accessible and customizable components that you can copy and paste
-          into your apps. Free. Open Source. And Next.js 14 🎉 Ready.
-        </p>
-      </div>
-      <div className="flex gap-4">
-        <Link
-          href={siteConfig.links.docs}
-          target="_blank"
-          rel="noreferrer"
-          className={buttonVariants()}
-        >
-          Documentation
-        </Link>
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          href={siteConfig.links.github}
-          className={buttonVariants({ variant: "outline" })}
-        >
-          GitHub
-        </Link>
+    <section className="container pt-6 md:py-10 dark:bg-gray-950 dark:text-gray-100">
+      <div className="mx-auto max-w-3xl p-8">
+        <h1 className="text-2xl font-bold mb-6">Todo List</h1>
+
+        <TodoForm />
+
+        <div className="space-y-4 mt-8">
+          {todos.map((todo: any) => (
+            <TodoItem key={todo._id} todo={todo} />
+          ))}
+        </div>
       </div>
     </section>
   )
