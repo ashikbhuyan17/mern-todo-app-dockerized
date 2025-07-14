@@ -1,0 +1,135 @@
+npm init -y
+yarn add -D typescript 
+tsc --init 
+yarn add -D  @types/express
+yarn add -D @types/cors
+yarn add -D ts-node-dev
+yarn add dotenv
+yarn add  cors
+yarn add express mongoose
+
+for setup eslint  prettier (https://blog.logrocket.com/linting-typescript-eslint-prettier/)
+ npm install eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev
+yarn add -D prettier
+yarn add -D eslint-config-prettier
+{
+    "semi": false, // Specify if you want to print semicolons at the end of statements
+    "singleQuote": true, // If you want to use single quotes
+    "arrowParens": "avoid", // Include parenthesis around a sole arrow function parameter
+  }
+
+
+  husky=> ami jody kono kichu fixed korte vhule jai bhe bhul code or code format bhul vabey push kore dey tokon husky push korar agey eslint and prettier check kore and sob tik takle push kore 
+
+  ami jokon push korbo tkn husky dayotho hbe eslint and format check kora thn push kora and error asle push hbe na , push cancel hoiye jabe 
+  yarn add husky --dev
+  yarn husky install
+  yarn husky add .husky/pre-commit "npm test"
+  yarn dlx husky-init --yarn2 && yarn
+
+
+lint-staged => shudhu stagging file gulu ke lint korbe 
+yarn add -D lint-staged
+
+
+http://localhost:5000/api/v1/users/create-user
+{
+    "user":{
+        "role":"admin"
+    }
+}
+http://localhost:5000/api/v1/users/list
+
+
+📝 Logger কি ও কেন দরকার (Express JS)
+Logger হলো এমন একটি টুল যা অ্যাপের ভেতরে কী কী হচ্ছে (যেমন: রিকোয়েস্ট, রেসপন্স, এরর) — সেগুলো ট্র্যাক ও রেকর্ড করে।
+
+কেন দরকার?
+🐞 বাগ খোঁজার জন্য (Debug)
+
+📊 অ্যাপ মনিটর করার জন্য – কোন API কতবার কল হচ্ছে, ইউজার কী করছে — এসব দেখা যায়।
+
+📁 প্রোডাকশন লগ রাখার জন্য – অ্যাপ লাইভ হলে কোন সমস্যা হচ্ছে, সেটা জানার একমাত্র উপায় হলো লগ।
+
+সাধারণ Logger Tools:
+morgan → HTTP request log করার জন্য
+
+winston → কাস্টম লগ ও ফাইল লগ করার জন্য
+
+
+
+<!-- CLI to generate module boilerplate
+yarn run generate:module students
+ -->
+
+12.2 => console.log(app.get('env') => development
+console.log(process.env)  
+
+        process.cwd(), //current directory
+
+12-9: Different ways to handle error
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+  throw new Error('error')
+  //next('next function er bitore kichu likle eta error bujay ja global error handle kore') //Error
+})
+
+//global error handle
+app.use((err, req: Request, res: Response, next: NextFunction) => {
+if(err instanceof Error){ //when throw 
+ res.ststus(400).json({error:err})
+}
+  res.ststus(500).json('Something went wrong') //when next()
+})
+
+12-10: Optimize your error handling methodology
+{
+  "error": {
+    "errors": {
+      "role": {
+        "name": "ValidatorError",
+        "message": "Path `role` is required.",
+        "properties": {
+          "message": "Path `role` is required.",
+          "type": "required",
+          "path": "role"
+        },
+        "kind": "required",
+        "path": "role"
+      }
+    },
+    "_message": "User validation failed",
+    "name": "ValidationError",
+    "message": "User validation failed: role: Path `role` is required."
+  }
+}
+
+mongoose validate error
+
+
+13-2 : handle promised (7 minutes)
+unhandle promise rejection hole server dup dap chash hoiye jabe tay etake vordho vabe crash korte hbe mane server sob kichu 
+off kore thn process take off kore dew cz amra jni node js ekta process
+
+13-5: How to organize your zod validation
+mongoose e to validation korbey amra cachi tar age zod diye validation korte 
+tay route e validation check korbo 
+
+
+
+
+15-9: Create User-Student using Transaction and Rollback
+Mongoose-এ transaction এবং rollback মূলত MongoDB-এর multi-document ACID (Atomicity, Consistency, Isolation, Durability) properties নিশ্চিত করতে ব্যবহৃত হয়। 
+Transaction কী?
+Transaction এর মাধ্যমে একাধিক ডাটাবেইস অপারেশন একসাথে execute হয়, এবং সবগুলো সফল হলে তবেই ডাটাবেজে স্থায়ীভাবে save হয়।
+
+যদি কোনো একটি অপারেশন fail করে, তাহলে সবকিছু rollback হয়ে যায় — অর্থাৎ, কোনো ডেটা চেঞ্জই হয় না।
+
+উদাহরণ: ধরো তুমি একজন ইউজারকে create করছো এবং তার account-এর জন্য একটা balance সেট করছো। ইউজার তৈরি হলেও 
+যদি balance সেট করতে গিয়ে error হয়, তাহলে পুরো process টা undo হয়ে যাবে — যাতে inconsistent ডেটা না থাকে।
+
+
+Rollback কী?
+Rollback মানে হল পূর্ববর্তী অবস্থায় ফিরে যাওয়া। অর্থাৎ, যদি transaction-এর মাঝখানে কোনো সমস্যা হয়, তাহলে আগের যেই সব কাজ হয়েছিল, সেগুলোকেও undo করে ফেলা হয়।
+
+
+check the docs => https://ashik17.hashnode.dev/mongodb-transaction-rollback
