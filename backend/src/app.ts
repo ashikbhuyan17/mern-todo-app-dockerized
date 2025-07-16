@@ -30,15 +30,17 @@ app.get('/', (req: Request, res: Response) => {
         <link rel="stylesheet" href="/styles.css">
       </head>
       <body>
-        <h1>Welcome to the Docker Logs Viewer Page!</h1>
+        <h1>Welcome to the Docker Logs</h1>
         <p>Go to <a href="/logs/errors">Error Logs</a> or <a href="/logs/successes">Success Logs</a>.</p>
       </body>
     </html>
   `)
 })
 app.get('/todos', async (req: Request, res: Response) => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/todos')
-  // const response = await fetch('http://ts-docker-container:5000/api/v1/users')
+  // const response = await fetch('https://jsonplaceholder.typicode.com/todos')
+  const response = await fetch(
+    'http://host.docker.internal:5000/api/v1/todo/list'
+  )
   const todos = await response.json()
   return res.status(200).json(todos)
 })
