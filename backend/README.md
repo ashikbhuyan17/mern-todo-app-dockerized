@@ -1,97 +1,37 @@
-# University Management System Authentication Service
+# 🚀 MERN Todo App (Dockerized)
 
-This is the documentation for the Authentication Service component of the University Management System. The Authentication Service provides authentication and authorization functionalities for the three main roles in the system: Admin, Student, and Faculty. It is built using TypeScript, Express.js, Zod validation, and MongoDB.
+This project Dockerizes the database, backend, and frontend of a MERN Todo App.
+For full setup details, check this link: </br>
+👉 https://www.notion.so/Building-multiple-containers-with-docker-23203c72720a80fca933dd70245bc969?source=copy_link
 
-## Functional Requirements
+# Dockerize
 
-### Student
+```bash
+# ধাপ ১: MongoDB official image ডাউনলোড করুন
+docker pull mongo
 
-- Student can login and log out.
-- Student can manage and update their profile.
-- Student can update certain fields.
+# ধাপ ২: MongoDB container ব্যাকগ্রাউন্ডে চালু করুন (পোর্ট ও রুট ইউজার সহ)
+docker run -d --name mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=pass123 mongo
 
-### Admin
+# ধাপ ৩: Volume ও নেটওয়ার্ক সহ MongoDB container চালান
+docker run --name mongodb --rm -v ts-docker-db:/data/db --network ts-docker-net -e MONGO_INITDB_ROOT_USERNAME=ts-docker -e MONGO_INITDB_ROOT_PASSWORD=ts-docker mongo
 
-- Admin can log in and log out.
-- Admin can manage and update their profile.
-- Admin can only update certain fields.
-- Admin can manage user accounts:
-  - Change Password
+# ধাপ ৪: চলমান Docker container গুলো দেখুন
+docker ps
 
-### Faculty
+# ধাপ ৬: Docker network তৈরি করুন (backend ও mongodb এর জন্য)
+docker network create ts-docker-net
 
-- Faculty can log in and log out.
-- Faculty can manage and update their profile.
-- Faculty can only update certain fields.
+# ধাপ ৭: নিরাপদ MongoDB container নেটওয়ার্কে চালান (পোর্ট প্রকাশ ছাড়া)
+docker run --name mongodb --rm --network ts-docker-net mongo
 
-## API Endpoints
+docker run --name mongodb --rm --network ts-docker-net -e MONGO_INITDB_ROOT_USERNAME=ts-docker -e MONGO_INITDB_ROOT_PASSWORD=ts-docker mongo
 
-### User
+# ধাপ ৮: `.env` ফাইলে MongoDB URI দিন (backend কানেকশনের জন্য)
+echo "DATABASE_URL=mongodb://mongodb:27017" > .env
 
-- `POST /users/create-student`
-- `POST /users/create-faculty`
-- `POST /users/create-admin`
+# ধাপ ৯: Backend Docker image তৈরি করুন
+docker build -t ts-docker-backend:v5 .
 
-### Student
-
-- `GET /students`
-- `GET /students?searchTerm=fr797`
-- `GET /students?page=1&limit=10&sortBy=gender&sortOrder=asc`
-- `GET /students/:id`
-- `PATCH /students/:id`
-- `DELETE /students/:id`
-
-### Faculty
-
-- `GET /faculties`
-- `GET /faculties?searchTerm=john`
-- `GET /faculties?page=1&limit=10&sortBy=gender&sortOrder=asc`
-- `GET /faculties/:id`
-- `PATCH /faculties/:id`
-- `DELETE /faculties/:id`
-
-### Admin
-
-- `GET /admins`
-- `GET /admins?searchTerm=us88`
-- `GET /admins?page=1&limit=10&sortBy=gender&sortOrder=asc`
-- `GET /admins/:id`
-- `PATCH /admins/:id`
-- `DELETE /admins/:id`
-
-### Academic Semester
-
-- `POST /academic-semesters/create-semester`
-- `GET /academic-semesters`
-- `GET /academic-semesters?searchTerm=fal`
-- `GET /academic-semesters?page=1&limit=10&sortBy=year&sortOrder=asc`
-- `GET /academic-semesters/:id`
-- `PATCH /academic-semesters/:id`
-- `DELETE /academic-semesters/:id`
-
-### Academic Department
-
-- `POST /academic-departments/create-department`
-- `GET /academic-departments`
-- `GET /academic-departments?searchTerm=math`
-- `GET /academic-departments?page=1&limit=10&sortBy=title&sortOrder=asc`
-- `GET /academic-departments/:id`
-- `PATCH /academic-departments/:id`
-- `DELETE /academic-departments/:id`
-
-### Academic Faculty
-
-- `POST /academic-faculties/create-faculty`
-- `GET /academic-faculties`
-- `GET /academic-faculties?searchTerm=com`
-- `GET /academic-faculties?page=1&limit=10&sortBy=title&sortOrder=asc`
-- `GET /academic-faculties/:id`
-- `PATCH /academic-faculties/:id`
-- `DELETE /academic-faculties/:id`
-
-### Authentication
-
-- `POST /auth/login`
-- `POST /auth/change-password`
-- `POST /auth/refresh-token`
-
+# ধাপ ১০: Backend container নেটওয়ার্ক ও ভলিউম সহ চালান
+docker run --name ts-docker-backend-container --rm --network ts-docker-net --env-file .env -w /app -v ts-docker-logs:/app/logs -v "$(pwd)":/app -v /app/node_modules -p 5000:5000 ts-docker-backend:v5
