@@ -1,0 +1,35 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\@ashik\\@docker\\todo-mern-docker-setup\\backend\\logs\\winston\\successes\\.9e6ea39545865a4f007b7b74df17d5f335aa57cf-audit.json",
+    "files": [
+        {
+            "date": 1752490654760,
+            "name": "D:\\@ashik\\@docker\\todo-mern-docker-setup\\backend\\logs\\winston\\successes\\phu-2025-14-07-16-success.log",
+            "hash": "0fa762887cef06f346a8a57bbdf1fd5c19b83d3e3a6bd96fa2f10f554b8989aa"
+        },
+        {
+            "date": 1752490805609,
+            "name": "D:\\@ashik\\@docker\\todo-mern-docker-setup\\backend\\logs\\winston\\successes\\phu-2025-14-07-17-success.log",
+            "hash": "969aa85f651911313111279b5715895d87ff8f5bfa6856ebfa069f0195445f85"
+        },
+        {
+            "date": 1752643679666,
+            "name": "D:\\@ashik\\@docker\\todo-mern-docker-setup\\backend\\logs\\winston\\successes\\phu-2025-16-07-11-success.log",
+            "hash": "786b88534d7f430b0aebb6bcab157f3b786730d6ef4a60049590f09bbbeb6db1"
+        },
+        {
+            "date": 1752645702799,
+            "name": "D:\\@ashik\\@docker\\todo-mern-docker-setup\\backend\\logs\\winston\\successes\\phu-2025-16-07-12-success.log",
+            "hash": "c506fdac3266a537a1c73ff51ce5419ac94e30240b6a4626d2b9c5817e975140"
+        },
+        {
+            "date": 1752649279365,
+            "name": "D:\\@ashik\\@docker\\todo-mern-docker-setup\\backend\\logs\\winston\\successes\\phu-2025-16-07-13-success.log",
+            "hash": "77d47ead3e734a921ee159db70ace607e584bf794a3b85bd2c3d28b2b45e28da"
+        }
+    ],
+    "hashType": "sha256"
+}

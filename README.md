@@ -35,3 +35,23 @@ docker build -t ts-docker-backend:v5 .
 
 # ধাপ ১০: Backend container নেটওয়ার্ক ও ভলিউম সহ চালান
 docker run --name ts-docker-backend-container --rm --network ts-docker-net --env-file .env -w /app -v ts-docker-logs:/app/logs -v "$(pwd)":/app -v /app/node_modules -p 5000:5000 ts-docker-backend:v5
+
+# ধাপ ১১: Frontend Docker image তৈরি করুন
+docker build -t ts-docker-frontend:v5 .
+
+# ধাপ ১২: `.env.local` ফাইলে API URL দিন (backend কানেকশনের জন্য)
+echo "NEXT_PUBLIC_API_BASE_URL=http://ts-docker-backend-container:5000/api/v1" > .env.local
+
+
+# ধাপ ১৩: Frontend container নেটওয়ার্ক সহ চালান
+docker run \
+  --name ts-docker-frontend-container \
+  --rm \
+  -p 3000:3000 \
+  --env-file .env.local \
+  -w /app \
+  -v "$(pwd)":/app \
+  -v /app/node_modules \
+  --network ts-docker-net \
+  -e WATCHPACK_POLLING=true \
+  ts-docker-frontend:v5

@@ -1,0 +1,35 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\@ashik\\@docker\\todo-mern-docker-setup\\backend\\logs\\winston\\errors\\.7ce60d2ec13b03a8f7b34380f555e95ba52c3569-audit.json",
+    "files": [
+        {
+            "date": 1752490654767,
+            "name": "D:\\@ashik\\@docker\\todo-mern-docker-setup\\backend\\logs\\winston\\errors\\phu-2025-14-07-16-error.log",
+            "hash": "fcdd3a1b5652e6337daaedebf68aed601b59c652489d8d85cdec61bb180fc4f6"
+        },
+        {
+            "date": 1752490805614,
+            "name": "D:\\@ashik\\@docker\\todo-mern-docker-setup\\backend\\logs\\winston\\errors\\phu-2025-14-07-17-error.log",
+            "hash": "e27ffcb2c5e82ff2f484fee1dd60a7a1eb1faa0825a6c09e63f6b444e26fcbc2"
+        },
+        {
+            "date": 1752643679683,
+            "name": "D:\\@ashik\\@docker\\todo-mern-docker-setup\\backend\\logs\\winston\\errors\\phu-2025-16-07-11-error.log",
+            "hash": "ef52d031f519fa54269711a6cef24781499901ace8f262775676b760f18707f6"
+        },
+        {
+            "date": 1752645702803,
+            "name": "D:\\@ashik\\@docker\\todo-mern-docker-setup\\backend\\logs\\winston\\errors\\phu-2025-16-07-12-error.log",
+            "hash": "f690d765b996893d3c9a5f0ee3e092130e0c0476e38e045a73683a19255eaf40"
+        },
+        {
+            "date": 1752649279369,
+            "name": "D:\\@ashik\\@docker\\todo-mern-docker-setup\\backend\\logs\\winston\\errors\\phu-2025-16-07-13-error.log",
+            "hash": "8a75cb1dc927d351efa00a8cf150aba613aab2abf19e1d539fb3162f1590f723"
+        }
+    ],
+    "hashType": "sha256"
+}
